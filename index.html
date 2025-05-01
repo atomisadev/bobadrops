@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="movingButton">
+    Try to click me
+  </button>
+
+  <script>
+    const button = document.querySelector("#movingButton");
+    function moveButton() {
+      const viewportW = window.innerWidth;
+      const viewportH = window.innerHeight;
+      const buttonRect = button.getBoundingClientRect();
+      const buttonW = buttonRect.width;
+      const buttonH = buttonRect.height;
+      const maxTop = viewportH - buttonH;
+      const maxLeft = viewportW - buttonW;
+      const randomTop = Math.max(0, Math.random() * maxTop);
+      const randomLeft = Math.max(0, Math.random() * maxLeft);
+      button.style.top = `${randomTop}px`;
+      button.style.left = `${randomLeft}px`;
+
+      button.style.transform = "none";
+    }
+
+    button.addEventListener("mouseover", moveButton);
+
+    button.addEventListener("touchstart", (event) => {
+      moveButton();
+    }, { passive: true })
+  </script>
+</body>
+</html>
